@@ -1,12 +1,34 @@
+import { useEffect, useState } from 'react'
 import { LayoutDashboard, ArrowRightLeft, ChartNoAxesColumn, Sparkles, ExternalLink } from 'lucide-react'
 
 const navItems = [
-  { label: 'Overview', icon: LayoutDashboard, target: 'overview', active: true },
+  { label: 'Overview', icon: LayoutDashboard, target: 'overview' },
   { label: 'Insights', icon: ChartNoAxesColumn, target: 'insights' },
   { label: 'Transactions', icon: ArrowRightLeft, target: 'transactions' },
 ]
 
 function Sidebar() {
+  const [activeTarget, setActiveTarget] = useState(() => {
+    if (typeof window === 'undefined') {
+      return 'overview'
+    }
+
+    return window.location.hash.replace('#', '') || 'overview'
+  })
+
+  useEffect(() => {
+    const handleHashChange = () => {
+      const nextTarget = window.location.hash.replace('#', '') || 'overview'
+      setActiveTarget(nextTarget)
+    }
+
+    window.addEventListener('hashchange', handleHashChange)
+
+    return () => {
+      window.removeEventListener('hashchange', handleHashChange)
+    }
+  }, [])
+
   return (
     <aside className="fixed inset-y-0 left-0 z-20 flex h-screen w-[260px] flex-col gap-7 overflow-y-auto border-r border-(--color-border) bg-[linear-gradient(180deg,var(--color-surface-raised),var(--color-surface))] px-4 py-6 shadow-[var(--shadow-soft)] max-[1120px]:w-[220px] max-[720px]:static max-[720px]:h-auto max-[720px]:w-full max-[720px]:overflow-visible max-[720px]:border-r-0 max-[720px]:border-b max-[720px]:gap-4 max-[720px]:px-4 max-[720px]:py-3">
       <div className="flex items-center gap-3">
@@ -28,11 +50,13 @@ function Sidebar() {
               <li key={item.label}>
                 <a
                   className={`flex w-full items-center gap-2.5 rounded-xl border border-transparent px-3 py-3 text-sm no-underline transition-all duration-200 hover:translate-x-0.5 hover:border-(--color-border) hover:bg-(--color-surface-raised) ${
-                    item.active
+                    activeTarget === item.target
                       ? 'border-[rgb(31_111_102/25%)] bg-(--color-primary-soft) font-semibold text-(--color-primary)'
                       : 'text-(--color-text-main)'
                   }`}
                   href={`#${item.target}`}
+                  onClick={() => setActiveTarget(item.target)}
+                  aria-current={activeTarget === item.target ? 'page' : undefined}
                 >
                   <Icon size={18} />
                   <span>{item.label}</span>
