@@ -1,0 +1,91 @@
+html {
+  scroll-behavior: smooth;
+}
+
+:root {
+  --color-bg: #edf4f6;
+  --color-bg-accent: #d5e7ec;
+  --color-surface: #f9fcfd;
+  --color-surface-raised: #ffffff;
+  --color-border: #d7e2e6;
+  --color-grid: #dbe5ea;
+  --color-text-main: #10252f;
+  --color-text-soft: #5a727d;
+  --color-primary: #1f6f66;
+  --color-primary-soft: #d5ece8;
+  --color-success: #2f8b58;
+  --color-danger: #c44754;
+  --color-warning: #b98432;
+  --color-chart-balance: #1f6f66;
+  --color-chart-segment-1: #0f5a62;
+  --color-chart-segment-2: #1f7a7a;
+  --color-chart-segment-3: #4a9f88;
+  --color-chart-segment-4: #76b69f;
+  --color-chart-segment-5: #93c7a2;
+  --color-chart-segment-6: #c6ddad;
+  --shadow-soft: 0 20px 60px rgb(16 37 47 / 9%);
+}
+
+html[data-theme='dark'] {
+  --color-bg: #0f171d;
+  --color-bg-accent: #17313d;
+  --color-surface: #121d24;
+  --color-surface-raised: #18252d;
+  --color-border: #28414d;
+  --color-grid: #233743;
+  --color-text-main: #e6f2f2;
+  --color-text-soft: #9eb3bb;
+  --color-primary: #71c0b4;
+  --color-primary-soft: #1a3637;
+  --color-success: #78c98c;
+  --color-danger: #ef8a93;
+  --color-warning: #e2b05c;
+  --color-chart-balance: #71c0b4;
+  --color-chart-segment-1: #6fb8c3;
+  --color-chart-segment-2: #71c0b4;
+  --color-chart-segment-3: #78c98c;
+  --color-chart-segment-4: #9ecf8d;
+  --color-chart-segment-5: #b6d7a9;
+  --color-chart-segment-6: #d0dfb8;
+  --shadow-soft: 0 24px 60px rgb(0 0 0 / 28%);
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--color-text-main);
+  background:
+    radial-gradient(circle at 10% 5%, var(--color-bg-accent) 0%, transparent 35%),
+    radial-gradient(circle at 85% 95%, var(--color-primary-soft) 0%, transparent 38%),
+    var(--color-bg);
+}
+
+html[data-theme='dark'] body {
+  background:
+    radial-gradient(circle at 10% 5%, rgb(113 192 180 / 16%) 0%, transparent 35%),
+    radial-gradient(circle at 85% 95%, rgb(120 201 140 / 14%) 0%, transparent 38%),
+    var(--color-bg);
+}
+
+@keyframes slide-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float-badge {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-5px);
+  }
+}
